@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script de fuzzing automatique pour Hackazon
+Script de fuzzing automatique pour applications web
 Teste XSS, SQLi, LFI, SSRF, Open Redirect
 """
 
@@ -8,7 +8,18 @@ import requests
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 
-TARGET = "http://hackazon.trackflaw.com"
+# ============================================================
+# CONFIGURATION - Modifiez ces variables selon votre cible
+# ============================================================
+
+# URL cible (sans slash final)
+TARGET = "http://example.com"
+
+# Timeout des requêtes (en secondes)
+REQUEST_TIMEOUT = 5
+
+# Fichier de sortie des résultats
+OUTPUT_FILE = "fuzzing_results.txt"
 
 # Payloads XSS
 XSS_PAYLOADS = [
@@ -46,7 +57,7 @@ SSRF_PAYLOADS = [
     "file:///etc/passwd",
 ]
 
-# Endpoints à tester
+# Endpoints à tester (FUZZ sera remplacé par les payloads)
 ENDPOINTS = [
     "/search?search_query=FUZZ",
     "/product/view?id=FUZZ",
@@ -56,13 +67,17 @@ ENDPOINTS = [
     "/redirect?url=FUZZ",
 ]
 
+# ============================================================
+# FIN DE LA CONFIGURATION
+# ============================================================
+
 def test_xss(url):
     """Teste XSS sur un endpoint"""
     results = []
     for payload in XSS_PAYLOADS:
         try:
             test_url = url.replace("FUZZ", urllib.parse.quote(payload))
-            r = requests.get(test_url, timeout=5)
+            r = requests.get(test_url, timeout=REQUEST_TIMEOUT)
             if payload in r.text or "<script>" in r.text:
                 results.append(f"✅ XSS trouvé: {test_url}")
         except:
@@ -75,7 +90,7 @@ def test_sqli(url):
     for payload in SQLI_PAYLOADS:
         try:
             test_url = url.replace("FUZZ", urllib.parse.quote(payload))
-            r = requests.get(test_url, timeout=5)
+            r = requests.get(test_url, timeout=REQUEST_TIMEOUT)
             if "sql" in r.text.lower() or "mysql" in r.text.lower() or "error" in r.text.lower():
                 results.append(f"✅ SQLi possible: {test_url}")
         except:
@@ -88,7 +103,7 @@ def test_lfi(url):
     for payload in LFI_PAYLOADS:
         try:
             test_url = url.replace("FUZZ", urllib.parse.quote(payload))
-            r = requests.get(test_url, timeout=5)
+            r = requests.get(test_url, timeout=REQUEST_TIMEOUT)
             if "root:" in r.text or "<?php" in r.text:
                 results.append(f"✅ LFI trouvé: {test_url}")
         except:
@@ -101,7 +116,7 @@ def test_ssrf(url):
     for payload in SSRF_PAYLOADS:
         try:
             test_url = url.replace("FUZZ", urllib.parse.quote(payload))
-            r = requests.get(test_url, timeout=5)
+            r = requests.get(test_url, timeout=REQUEST_TIMEOUT)
             if r.status_code == 200 and len(r.text) > 100:
                 results.append(f"✅ SSRF possible: {test_url}")
         except:
@@ -109,7 +124,9 @@ def test_ssrf(url):
     return results
 
 def main():
-    print("🔥 Fuzzing automatique de Hackazon")
+    print("🔥 Fuzzing automatique")
+    print("=" * 50)
+    print(f"Cible: {TARGET}")
     print("=" * 50)
     
     all_results = []
@@ -150,10 +167,10 @@ def main():
         print(result)
     
     # Sauvegarde résultats
-    with open("fuzzing_results.txt", "w") as f:
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(all_results))
     
-    print(f"\n💾 Résultats sauvegardés dans fuzzing_results.txt")
+    print(f"\n💾 Résultats sauvegardés dans {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
