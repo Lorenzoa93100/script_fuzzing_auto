@@ -141,13 +141,6 @@ Cet outil est destiné à des fins éducatives et de tests de sécurité autoris
 
 Ce projet est développé dans un cadre éducatif (ESGI - 5SIJ).
 
-## 👥 Auteurs
-
-- **Célian Desrayaud**
-- **Lorenzon Beaujard**
-
-ESGI - 5ème année Sécurité Informatique et Judiciaire
-
 ## 🔗 Contexte
 
 Ce fuzzer a été développé dans le cadre d'un projet académique de sécurité applicative pour le cours de Test d'Intrusion.
