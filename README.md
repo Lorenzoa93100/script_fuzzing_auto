@@ -1,12 +1,12 @@
-# 🔥 Web Fuzzer - Scanner de Vulnérabilités Web
+# Web Fuzzer - Scanner de Vulnérabilités Web
 
 Script Python automatisé pour la détection de vulnérabilités web.
 
-## 📋 Description
+## Description
 
 **Web Fuzzer** est un outil de fuzzing personnalisé développé en Python pour identifier automatiquement les vulnérabilités web courantes. Il teste plusieurs endpoints avec des payloads malveillants pour détecter les failles XSS, SQLi, LFI et SSRF.
 
-## 🎯 Fonctionnalités
+## Fonctionnalités
 
 - ✅ **Détection XSS** (Cross-Site Scripting)
 - ✅ **Détection SQLi** (Injection SQL)
@@ -15,7 +15,7 @@ Script Python automatisé pour la détection de vulnérabilités web.
 - ✅ **Tests automatisés** sur 6 endpoints critiques
 - ✅ **Export des résultats** en fichier texte
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 
@@ -28,7 +28,7 @@ Script Python automatisé pour la détection de vulnérabilités web.
 pip install requests
 ```
 
-## 💻 Utilisation
+## Utilisation
 
 ### Lancement du fuzzer
 
@@ -73,7 +73,7 @@ Le fuzzer teste automatiquement ces endpoints :
 - `/documents?file=FUZZ`
 - `/redirect?url=FUZZ`
 
-## 📊 Payloads inclus
+## Payloads inclus
 
 ### XSS (5 payloads)
 - `<script>alert(1)</script>`
@@ -103,28 +103,28 @@ Le fuzzer teste automatiquement ces endpoints :
 - `http://localhost:3306`
 - `file:///etc/passwd`
 
-## 📈 Exemple de sortie
+##  Exemple de sortie
 
 ```
-🔥 Fuzzing automatique
+ Fuzzing automatique
 ==================================================
 
-🎯 Test de: /search?search_query=FUZZ
+ Test de: /search?search_query=FUZZ
   - XSS... 3 trouvé(s)
   - SQLi... 2 trouvé(s)
   - LFI... 0 trouvé(s)
   - SSRF... 1 trouvé(s)
 
 ==================================================
-📊 RÉSULTATS FINAUX: 15 failles trouvées
+ RÉSULTATS FINAUX: 15 failles trouvées
 ==================================================
 ✅ XSS trouvé: http://example.com/search?search_query=%3Cscript%3Ealert%281%29%3C%2Fscript%3E
 ✅ SQLi possible: http://example.com/search?search_query=%27
 
-💾 Résultats sauvegardés dans fuzzing_results.txt
+ Résultats sauvegardés dans fuzzing_results.txt
 ```
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 
 - **Python 3.11** - Langage de programmation
 - **requests** - Bibliothèque HTTP pour Python
@@ -137,15 +137,15 @@ Le fuzzer teste automatiquement ces endpoints :
 
 Cet outil est destiné à des fins éducatives et de tests de sécurité autorisés uniquement. N'utilisez ce script que sur des applications pour lesquelles vous avez une autorisation explicite. L'utilisation non autorisée de cet outil peut être illégale.
 
-## 📝 Licence
+## Licence
 
 Ce projet est développé dans un cadre éducatif (ESGI - 5SIJ).
 
-## 🔗 Contexte
+## Contexte
 
 Ce fuzzer a été développé dans le cadre d'un projet académique de sécurité applicative pour le cours de Test d'Intrusion.
 
-## 📚 Ressources
+## Ressources
 
 - [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
